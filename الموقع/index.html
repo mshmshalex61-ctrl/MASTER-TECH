@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTER TECH - ماستر تك</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-2xl font-bold tracking-wider text-amber-500">
+                <i class="fa-solid fa-microchip col-span-1"></i> MASTER TECH
+            </div>
+            <nav class="flex flex-wrap gap-4 text-sm md:text-base">
+                <a href="#mobile" class="hover:text-amber-400 transition">إكسسوار الموبايل</a>
+                <a href="#computer" class="hover:text-amber-400 transition">إكسسوار الكمبيوتر</a>
+                <a href="#cctv" class="hover:text-amber-400 transition">كاميرات المراقبة</a>
+                <a href="#sat" class="hover:text-amber-400 transition">الدش والريسيفير</a>
+                <a href="#offers" class="bg-red-600 px-3 py-1 rounded text-white font-bold hover:bg-red-700 transition">العروض 🔥</a>
+            </nav>
+            <div>
+                <button onclick="toggleAdminPanel()" class="bg-amber-500 text-slate-900 px-4 py-2 rounded-lg font-bold hover:bg-amber-400 transition flex items-center gap-2">
+                    <i class="fa-solid fa-user-gear"></i> لوحة المدير
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gradient-to-r from-slate-800 to-slate-900 text-white py-16 text-center px-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">أهلاً بكم في MASTER TECH</h1>
+        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">خياراتكم الأفضل في عالم التكنولوجيا والإلكترونيات تحت إشراف م/ هشام محمد حسن.</p>
+    </section>
+
+    <section id="adminPanel" class="hidden container mx-auto px-4 my-8 p-6 bg-white rounded-xl shadow-md border-2 border-amber-500">
+        <div class="flex justify-between items-center mb-6 border-b pb-4">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900"><i class="fa-solid fa-sliders"></i> لوحة تحكم المدير</h2>
+                <p class="text-sm text-gray-600">المدير المسؤول: <strong>م/ هشام محمد حسن</strong> (<span class="text-blue-600">mshmshalex61@gmail.com</span>)</p>
+            </div>
+            <button onclick="toggleAdminPanel()" class="text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+        </div>
+
+        <form id="productForm" onsubmit="saveProduct(event)" class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <input type="hidden" id="productId">
+            <div>
+                <label class="block text-sm font-bold mb-1">اسم المنتج</label>
+                <input type="text" id="prodName" required class="w-full border p-2 rounded">
+            </div>
+            <div>
+                <label class="block text-sm font-bold mb-1">القسم</label>
+                <select id="prodCategory" required class="w-full border p-2 rounded">
+                    <option value="mobile">إكسسوار الموبايل</option>
+                    <option value="computer">إكسسوار الكمبيوتر</option>
+                    <option value="cctv">كاميرات المراقبة</option>
+                    <option value="sat">الدش والريسيفير</option>
+                    <option value="offers">العروض</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-bold mb-1">السعر</label>
+                <input type="text" id="prodPrice" required class="w-full border p-2 rounded" placeholder="مثال: 150 ج.م">
+            </div>
+            <div>
+                <label class="block text-sm font-bold mb-1">رابط صورة المنتج (URL)</label>
+                <input type="url" id="prodImage" class="w-full border p-2 rounded" placeholder="https://example.com/image.jpg">
+            </div>
+            <div class="flex items-end">
+                <button type="submit" class="w-full bg-emerald-600 text-white font-bold p-2 rounded hover:bg-emerald-700 transition">
+                    <i class="fa-solid fa-plus"></i> حفظ المنتج
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <main class="container mx-auto px-4 py-8 space-y-12">
+        <section id="mobile">
+            <h2 class="text-2xl font-bold border-r-4 border-amber-500 pr-3 mb-6">قسم إكسسوار الموبايل</h2>
+            <div id="container-mobile" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <section id="computer">
+            <h2 class="text-2xl font-bold border-r-4 border-amber-500 pr-3 mb-6">قسم إكسسوار الكمبيوتر</h2>
+            <div id="container-computer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <section id="cctv">
+            <h2 class="text-2xl font-bold border-r-4 border-amber-500 pr-3 mb-6">قسم كاميرات المراقبة</h2>
+            <div id="container-cctv" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <section id="sat">
+            <h2 class="text-2xl font-bold border-r-4 border-amber-500 pr-3 mb-6">قسم الدش والريسيفير</h2>
+            <div id="container-sat" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <section id="offers" class="bg-red-50 p-6 rounded-xl">
+            <h2 class="text-2xl font-bold border-r-4 border-red-600 pr-3 mb-6 text-red-600">قسم العروض الحصرية 🔥</h2>
+            <div id="container-offers" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-gray-400 text-center py-8 border-t border-slate-800 mt-12">
+        <p class="mb-2">© 2026 MASTER TECH. جميع الحقوق محفوظة.</p>
+        <p class="text-sm">مدير الموقع: <span class="text-white font-bold">م/ هشام محمد حسن</span></p>
+        <p class="text-xs mt-1">للتواصل: <a href="mailto:mshmshalex61@gmail.com" class="text-amber-500 hover:underline">mshmshalex61@gmail.com</a></p>
+    </footer>
+
+    <script>
+        // المنتجات الافتراضية للبدء بها مع روابط لصور معبرة
+        let defaultProducts = [
+            { id: 1, name: "شاحن سريع بقوة 65 واط", category: "mobile", price: "450 ج.م", image: "https://images.unsplash.com/photo-1622445262465-2481c4574875?w=400" },
+            { id: 2, name: "ماوس جيمنج RGB احترافي", category: "computer", price: "350 ج.م", image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400" },
+            { id: 3, name: "كاميرا مراقبة خارجية بدقة 4MP", category: "cctv", price: "1200 ج.م", image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=400" },
+            { id: 4, name: "ريسيفير عالي الجودة Full HD", category: "sat", price: "600 ج.م", image: "https://images.unsplash.com/photo-1595935736720-6d1a10056972?w=400" },
+            { id: 5, name: "عرض: شاحن + سماعة بلوتوث", category: "offers", price: "550 ج.م", image: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=400" }
+        ];
+
+        // تحميل المنتجات من المتصفح أو وضع الافتراضية
+        let products = JSON.parse(localStorage.getItem('masterTechProducts')) || defaultProducts;
+
+        // دالة لإظهار وإخفاء لوحة التحكم
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        // دالة عرض المنتجات في الأقسام المخصصة لها
+        function displayProducts() {
+            const categories = ['mobile', 'computer', 'cctv', 'sat', 'offers'];
+            
+            // تنظيف الحاويات أولاً
+            categories.forEach(cat => {
+                document.getElementById(`container-${cat}`).innerHTML = '';
+            });
+
+            // توزيع المنتجات
+            products.forEach(prod => {
+                const container = document.getElementById(`container-${prod.category}`);
+                if (container) {
+                    const card = document.createElement('div');
+                    card.className = "bg-white p-5 rounded-xl shadow hover:shadow-md transition flex flex-col justify-between border border-gray-100 relative group overflow-hidden";
+                    
+                    // التحقق من وجود صورة أو إرجاع الأيقونة الافتراضية في حال عدم توفرها
+                    const imageHTML = prod.image 
+                        ? `<img src="${prod.image}" alt="${prod.name}" class="w-full h-40 object-cover rounded-lg mb-4">`
+                        : `<div class="h-40 bg-gray-100 rounded-lg flex items-center justify-center mb-4 text-gray-400 text-4xl"><i class="${getIcon(prod.category)}"></i></div>`;
+
+                    card.innerHTML = `
+                        <div>
+                            ${imageHTML}
+                            <h3 class="font-bold text-lg text-slate-800 mb-2">${prod.name}</h3>
+                            <span class="text-xl font-extrabold text-emerald-600 block mb-4">${prod.price}</span>
+                        </div>
+                        <div class="flex gap-2 pt-2 border-t border-gray-100">
+                            <button onclick="editProduct(${prod.id})" class="flex-1 bg-amber-500 text-white text-xs py-1.5 rounded hover:bg-amber-600 transition"><i class="fa-solid fa-pen"></i> تعديل</button>
+                            <button onclick="deleteProduct(${prod.id})" class="flex-1 bg-red-500 text-white text-xs py-1.5 rounded hover:bg-red-600 transition"><i class="fa-solid fa-trash"></i> حذف</button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+            // حفظ التحديثات في ذاكرة المتصفح المحلية
+            localStorage.setItem('masterTechProducts', JSON.stringify(products));
+        }
+
+        // دالة لجلب أيقونة مناسبة لكل قسم بشكل تلقائي (في حال لم تتوفر صورة)
+        function getIcon(cat) {
+            switch(cat) {
+                case 'mobile': return 'fa-solid fa-mobile-screen-button';
+                case 'computer': return 'fa-solid fa-laptop';
+                case 'cctv': return 'fa-solid fa-video';
+                case 'sat': return 'fa-solid fa-satellite-dish';
+                case 'offers': return 'fa-solid fa-tags text-red-500';
+                default: return 'fa-solid fa-box';
+            }
+        }
+
+        // دالة حفظ المنتج (إضافة جديد أو تعديل الحالي)
+        function saveProduct(e) {
+            e.preventDefault();
+            const id = document.getElementById('productId').value;
+            const name = document.getElementById('prodName').value;
+            const category = document.getElementById('prodCategory').value;
+            const price = document.getElementById('prodPrice').value;
+            const image = document.getElementById('prodImage').value; // جلب رابط الصورة
+
+            if (id) {
+                // وضع التعديل
+                products = products.map(p => p.id == id ? { id: Number(id), name, category, price, image } : p);
+            } else {
+                // وضع الإضافة
+                const newProd = {
+                    id: Date.now(),
+                    name,
+                    category,
+                    price,
+                    image
+                };
+                products.push(newProd);
+            }
+
+            displayProducts();
+            document.getElementById('productForm').reset();
+            document.getElementById('productId').value = '';
+            alert("تم حفظ المنتج بنجاح في نظام MASTER TECH");
+        }
+
+        // دالة تعديل المنتج (تعبئة البيانات في الفورم للتعديل)
+        function editProduct(id) {
+            const prod = products.find(p => p.id === id);
+            if (prod) {
+                document.getElementById('productId').value = prod.id;
+                document.getElementById('prodName').value = prod.name;
+                document.getElementById('prodCategory').value = prod.category;
+                document.getElementById('prodPrice').value = prod.price;
+                document.getElementById('prodImage').value = prod.image || ''; // تعبئة رابط الصورة الحالي إن وجد
+                
+                // الصعود لأعلى لرؤية لوحة التحكم
+                document.getElementById('adminPanel').classList.remove('hidden');
+                window.scrollTo({ top: document.getElementById('adminPanel').offsetTop - 100, behavior: 'smooth' });
+            }
+        }
+
+        // دالة حذف المنتج
+        function deleteProduct(id) {
+            if (confirm("هل أنت متأكد من حذف هذا المنتج من الموقع؟")) {
+                products = products.filter(p => p.id !== id);
+                displayProducts();
+            }
+        }
+
+        // تشغيل العرض عند فتح الصفحة أول مرة
+        displayProducts();
+    </script>
+</body>
+</html>
